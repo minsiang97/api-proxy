@@ -1,6 +1,9 @@
 import express, { Express } from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app: Express = express();
 
@@ -11,7 +14,7 @@ app.use(cors());
 app.use(
   "/",
   createProxyMiddleware({
-    target: "https://qa-interview-test.qa.splytech.dev/api", // Replace with your API server
+    target: process.env.BASE_URL, // Replace with your API server
     changeOrigin: true,
   })
 );
